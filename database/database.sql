@@ -46,7 +46,7 @@ CREATE TABLE TicketHashtag (
 CREATE TABLE User (
     username TEXT PRIMARY KEY,
     name TEXT NOT NULL,
-   	password TEXT NOT NULL,
+    password TEXT NOT NULL,
     email TEXT NOT NULL,
     role TEXT NOT NULL,
     departmentName TEXT REFERENCES Department(Name)
