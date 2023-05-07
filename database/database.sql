@@ -24,32 +24,29 @@ CREATE TABLE Department (
     name TEXT PRIMARY KEY
 );
 
-CREATE TABLE Hashtag (
-    name TEXT PRIMARY KEY
-);
-
 CREATE TABLE Ticket (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     status TEXT NOT NULL,
-    createdBy TEXT REFERENCES User(username) NOT NULL,
-    beingSolvedBy TEXT REFERENCES User(username)
+    createdBy INTEGER REFERENCES User(id) NOT NULL,
+    beingSolvedBy INTEGER REFERENCES User(id)
     departmentName TEXT REFERENCES Department(name),
     priority INTEGER,
 );
 
-CREATE TABLE TicketHashtag (
-    name TEXT REFERENCES Hashtag(name),
+CREATE TABLE Hashtag (
+    hashtag TEXT NOT NULL,
     idTicket INTEGER REFERENCES Ticket(id),
-    PRIMARY KEY (name, idTicket)
+    PRIMARY KEY (hashtag, idTicket)
 );
 
 CREATE TABLE User (
-    username TEXT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
+    username TEXT NOT NULL UNIQUE,
     name TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
-    email TEXT NOT NULL,
-    role TEXT NOT NULL,
-    departmentName TEXT REFERENCES Department(Name)
+    role TEXT CHECK(role IN ('client','agent','admin')) NOT NULL DEFAULT 'client',
+    idDepartment INTEGER REFERENCES Department(id)
 );
 
 /*******************************************************************************
