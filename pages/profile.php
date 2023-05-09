@@ -7,16 +7,16 @@
   if (!$session->isLoggedIn()) die(header('Location: /'));
 
   require_once(__DIR__ . '/../database/connection.db.php');
-  require_once(__DIR__ . '/../database/customer.class.php');
+  require_once(__DIR__ . '/../database/user.class.php');
 
   require_once(__DIR__ . '/../templates/common.tpl.php');
-  require_once(__DIR__ . '/../templates/customer.tpl.php');
+  require_once(__DIR__ . '/../templates/user.tpl.php');
 
   $db = getDatabaseConnection();
 
-  $customer = Customer::getCustomer($db, $session->getId());
+  $user = User::getUser($db, $session->getId());
 
   drawHeader($session);
-  drawProfileForm($customer);
+  drawProfileForm($user);
   drawFooter();
 ?>

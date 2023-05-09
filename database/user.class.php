@@ -13,7 +13,7 @@
       $this->id = $id;
       $this->username = $username;
       $this->name = $name;
-      $this->email = $email;
+      $this->email = strtolower($email);
       $this->role = $role;
       $this->departmentName = $departmentName;
     }
@@ -57,6 +57,24 @@
         $user['role'],
         $user['departmentName']
       );
+    }
+
+    function save(PDO $db) {
+      $stmt = $db->prepare('
+        UPDATE USER SET username = ?, name = ?, email = ?
+        WHERE id = ?
+      ');
+
+      $stmt->execute(array($this->username, $this->name, strtolower($this->email), $this->id));
+    }
+
+    function updatePassword(PDO $db, string $password) {
+      $stmt = $db->prepare('
+        UPDATE USER SET password = ?
+        WHERE id = ?
+      ');
+
+      $stmt->execute(array(sha1($password), $this->id));
     }
 
   }

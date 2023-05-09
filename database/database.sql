@@ -7,7 +7,6 @@ DROP TABLE IF EXISTS Comment;
 DROP TABLE IF EXISTS Department;
 DROP TABLE IF EXISTS Hashtag;
 DROP TABLE IF EXISTS Ticket;
-DROP TABLE IF EXISTS TicketHashtag;
 DROP TABLE IF EXISTS User;
 
 /*******************************************************************************
@@ -17,7 +16,9 @@ DROP TABLE IF EXISTS User;
 CREATE TABLE Comment (
     id INTEGER PRIMARY KEY,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    content TEXT NOT NULL
+    content TEXT NOT NULL,
+    idCreator INTEGER REFERENCES User(id) NOT NULL,
+    idTicket INTEGER REFERENCES Ticket(id) NOT NULL
 );
 
 CREATE TABLE Department (
@@ -26,11 +27,12 @@ CREATE TABLE Department (
 
 CREATE TABLE Ticket (
     id INTEGER PRIMARY KEY,
-    status TEXT NOT NULL,
-    createdBy INTEGER REFERENCES User(id) NOT NULL,
-    beingSolvedBy INTEGER REFERENCES User(id)
+    title TEXT NOT NULL,
+    status TEXT CHECK(status IN ('open','assigned','closed')) NOT NULL DEFAULT 'open',
+    idCreator INTEGER REFERENCES User(id) NOT NULL,
+    idAssigned INTEGER REFERENCES User(id),
     departmentName TEXT REFERENCES Department(name),
-    priority INTEGER,
+    priority INTEGER
 );
 
 CREATE TABLE Hashtag (
@@ -58,4 +60,6 @@ CREATE TABLE User (
    Populate Tables
 ********************************************************************************/
 
-
+INSERT INTO User (username, name, email, password) VALUES ('mike', 'Miguel', 'm@m.com', 'a17fed27eaa842282862ff7c1b9c8395a26ac320');
+INSERT INTO Ticket (title, idCreator) VALUES ('It does not #justwerk', 1);
+INSERT INTO Comment (content, idCreator, idTicket) VALUES ('halp plz', 1, 1);

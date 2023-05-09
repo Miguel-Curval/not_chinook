@@ -4,17 +4,19 @@
   require_once(__DIR__ . '/../utils/session.php');
   $session = new Session();
 
+  if (!$session->isLoggedIn()) die(header('Location: /'));
+
   require_once(__DIR__ . '/../database/connection.db.php');
-  require_once(__DIR__ . '/../database/ticket.class.php');
+  require_once(__DIR__ . '/../database/comment.class.php');
 
   require_once(__DIR__ . '/../templates/common.tpl.php');
-  require_once(__DIR__ . '/../templates/ticket.tpl.php');
+  require_once(__DIR__ . '/../templates/comment.tpl.php');
 
   $db = getDatabaseConnection();
 
-  $tickets = Ticket::getTickets($db, 8);
+  $comment = Comment::getComment($db, intval($_GET['id']));
 
   drawHeader($session);
-  drawTickets($tickets);
+  drawEditComment($comment);
   drawFooter();
 ?>
