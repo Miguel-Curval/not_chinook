@@ -9,10 +9,10 @@ PRAGMA foreign_keys = ON;
 ********************************************************************************/
 
 DROP TABLE IF EXISTS Comment;
-DROP TABLE IF EXISTS Department;
 DROP TABLE IF EXISTS Hashtag;
 DROP TABLE IF EXISTS Ticket;
 DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Department;
 
 /*******************************************************************************
    Create Tables
@@ -66,6 +66,7 @@ CREATE TABLE Comment (
    Populate Tables
 ********************************************************************************/
 
+INSERT INTO Department (name) VALUES ('IT');
 INSERT INTO User (username, name, email, password) VALUES ('mike', 'Miguel', 'm@m.com', 'a17fed27eaa842282862ff7c1b9c8395a26ac320');
-INSERT INTO Ticket (title, idCreator) VALUES ('It does not #justwerk', 1);
+INSERT INTO Ticket (title, idCreator, idAssigned, departmentName, priority) VALUES ('It does not #justwerk', 1, 1, 'IT', 1);
 INSERT INTO Comment (content, idCreator, idTicket) VALUES ('halp plz', 1, 1);
