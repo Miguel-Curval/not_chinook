@@ -18,16 +18,19 @@ DROP TABLE IF EXISTS User;
    Create Tables
 ********************************************************************************/
 
-CREATE TABLE Comment (
-    id INTEGER PRIMARY KEY,
-    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    content TEXT NOT NULL,
-    idCreator INTEGER REFERENCES User(id) NOT NULL,
-    idTicket INTEGER REFERENCES Ticket(id) NOT NULL
-);
 
 CREATE TABLE Department (
     name TEXT PRIMARY KEY
+);
+
+CREATE TABLE User (
+    id INTEGER PRIMARY KEY,
+    username TEXT NOT NULL UNIQUE,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    role TEXT CHECK(role IN ('client','agent','admin')) NOT NULL DEFAULT 'client',
+    departmentName TEXT REFERENCES Department(name)
 );
 
 CREATE TABLE Ticket (
@@ -46,14 +49,12 @@ CREATE TABLE Hashtag (
     PRIMARY KEY (hashtag, idTicket)
 );
 
-CREATE TABLE User (
+CREATE TABLE Comment (
     id INTEGER PRIMARY KEY,
-    username TEXT NOT NULL UNIQUE,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL,
-    role TEXT CHECK(role IN ('client','agent','admin')) NOT NULL DEFAULT 'client',
-    departmentName TEXT REFERENCES Department(name)
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    content TEXT NOT NULL,
+    idCreator INTEGER REFERENCES User(id) NOT NULL,
+    idTicket INTEGER REFERENCES Ticket(id) NOT NULL
 );
 
 /*******************************************************************************
