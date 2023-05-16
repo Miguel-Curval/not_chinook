@@ -53,7 +53,7 @@ CREATE TABLE User (
     email TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
     role TEXT CHECK(role IN ('client','agent','admin')) NOT NULL DEFAULT 'client',
-    idDepartment INTEGER REFERENCES Department(id)
+    departmentName TEXT REFERENCES Department(name)
 );
 
 /*******************************************************************************
