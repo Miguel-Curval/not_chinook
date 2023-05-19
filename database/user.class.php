@@ -9,26 +9,31 @@
     public string $role;
     public string $departmentName;
 
-    public function __construct(int $id, string $username, string $name, string $email, string $role, string $departmentName) {
+    public function __construct(int $id, string $username, string $name, string $email, string $role, $departmentName) {
       $this->id = $id;
       $this->username = $username;
       $this->name = $name;
       $this->email = strtolower($email);
       $this->role = $role;
+      if (!$departmentName) $departmentName = '';
       $this->departmentName = $departmentName;
     }
 
     static function newUser(PDO $db, $username, $name, $email, $password) {
-      $stmt = $db->prepare('
-        INSERT
-        INTO User (username, name, email, password) 
-        VALUES (?, ?, ?, ?)
-      ');
-  
-      $stmt->execute(array($username, $name, $email, sha1($password)));
+      try {
+        $stmt = $db->prepare('
+          INSERT
+          INTO User (username, name, email, password) 
+          VALUES (?, ?, ?, ?)
+        ');
+
+        $stmt->execute(array($username, $name, $email, sha1($password)));
+      } catch(PDOException $e) {
+        die("Not unique: " . $e->getMessage());
+    }
     }
     
-    static function getUserWithPassword(PDO $db, string $email, string $password) : ?User {
+    static function getUserWithPassword(PDO $db, string $email, string $password) : ? User {
       $stmt = $db->prepare('
         SELECT id, username, name, password, email, role, departmentName
         FROM User 
@@ -51,7 +56,7 @@
 
     static function getUser(PDO $db, int $id) : User {
       $stmt = $db->prepare('
-        SELECT username, name, email, role, departmentName
+        SELECT id, username, name, email, role, departmentName
         FROM User 
         WHERE id = ?
       ');

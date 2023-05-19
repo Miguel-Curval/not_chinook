@@ -24,7 +24,7 @@
 <?php } ?>
 
 <?php function drawRegistrationForm() { ?>
-<h2>Profile</h2>
+<h2>We know you agree to the terms of service</h2>
 <form action="../actions/action_register.php" method="post" class="profile">
 
 <label for="username">Username:</label>
@@ -42,6 +42,6 @@
 <label for="repeat_password">Repeat Password:</label>
 <input id="repeat_password" type="password" name="repeat_password">
   
-  <button type="submit">Save</button>
+  <button type="submit">Register</button>
 </form>
 <?php } ?>
