@@ -15,7 +15,7 @@
   $db = getDatabaseConnection();
 
   $ticket = Ticket::getTicket($db, intval($_GET['id']));
-  $user = User::getUser($db, ticket->idCreator);
+  $user = User::getUser($db, $ticket->idCreator);
   $comments = Comment::getTicketComments($db, intval($_GET['id']));
 
   drawHeader($session);

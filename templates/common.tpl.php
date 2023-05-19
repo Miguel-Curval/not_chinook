@@ -21,7 +21,7 @@
       <h1><a href="/">Tickets thingie</a></h1>
       <?php 
         if ($session->isLoggedIn()) drawLogoutForm($session);
-        else drawLoginForm($session);
+        else drawLoginForm();
       ?>
     </header>
   

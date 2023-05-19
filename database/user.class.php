@@ -17,10 +17,20 @@
       $this->role = $role;
       $this->departmentName = $departmentName;
     }
+
+    static function newUser(PDO $db, $username, $name, $email, $password) {
+      $stmt = $db->prepare('
+        INSERT
+        INTO User (username, name, email, password) 
+        VALUES (?, ?, ?, ?)
+      ');
+  
+      $stmt->execute(array($username, $name, $email, sha1($password)));
+    }
     
     static function getUserWithPassword(PDO $db, string $email, string $password) : ?User {
       $stmt = $db->prepare('
-        SELECT username, name, password, email, role, departmentName
+        SELECT id, username, name, password, email, role, departmentName
         FROM User 
         WHERE lower(email) = ? AND password = ?
       ');
@@ -29,12 +39,12 @@
   
       if ($user = $stmt->fetch()) {
         return new User(
-        $user['id'],
-        $user['username'],
-        $user['name'],
-        $user['email'],
-        $user['role'],
-        $user['departmentName']
+          $user['id'],
+          $user['username'],
+          $user['name'],
+          $user['email'],
+          $user['role'],
+          $user['departmentName']
         );
       } else return null;
     }
@@ -61,7 +71,7 @@
 
     function save(PDO $db) {
       $stmt = $db->prepare('
-        UPDATE USER SET username = ?, name = ?, email = ?
+        UPDATE User SET username = ?, name = ?, email = ?
         WHERE id = ?
       ');
 
@@ -70,12 +80,11 @@
 
     function updatePassword(PDO $db, string $password) {
       $stmt = $db->prepare('
-        UPDATE USER SET password = ?
+        UPDATE User SET password = ?
         WHERE id = ?
       ');
 
       $stmt->execute(array(sha1($password), $this->id));
     }
-
   }
 ?>
