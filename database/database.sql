@@ -67,6 +67,6 @@ CREATE TABLE Comment (
 ********************************************************************************/
 
 INSERT INTO Department (name) VALUES ('IT');
-INSERT INTO User (username, name, email, password) VALUES ('mike', 'Miguel', 'm@m.com', 'a17fed27eaa842282862ff7c1b9c8395a26ac320');
+INSERT INTO User (username, name, email, password) VALUES ('mike', 'Miguel', 'm@m.com', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684'); /* pass is "pass" */
 INSERT INTO Ticket (title, idCreator, idAssigned, departmentName, priority) VALUES ('It does not #justwerk', 1, 1, 'IT', 1);
 INSERT INTO Comment (content, idCreator, idTicket) VALUES ('halp plz', 1, 1);

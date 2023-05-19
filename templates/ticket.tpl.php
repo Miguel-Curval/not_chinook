@@ -13,7 +13,7 @@
     <?php foreach($tickets as $ticket) { ?> 
       <article>
         <img src="https://picsum.photos/200?<?=$ticket->id?>">
-        <a href="../pages/ticket.php?id=<?=$ticket->id?>"><?=$ticket->name?></a>
+        <a href="../pages/ticket.php?id=<?=$ticket->id?>"><?=$ticket->title?></a>
       </article>
     <?php } ?>
   </section>
