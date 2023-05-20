@@ -18,7 +18,8 @@
   <body>
 
     <header>
-      <h1><a href="/">Tickets thingie</a></h1>
+    <h1><a href="/">Tickets thingie</a></h1>
+    <h1><a href="../pages/new_ticket.php">Submit New Ticket</a></h1>
       <?php 
         if ($session->isLoggedIn()) drawLogoutForm($session);
         else drawLoginForm();
@@ -59,5 +60,12 @@
   <form action="../actions/action_logout.php" method="post" class="logout">
     <a href="../pages/profile.php"><?=$session->getName()?></a>
     <button type="submit">Logout</button>
+  </form>
+<?php } ?>
+
+<?php function drawNewTicketForm() { ?>
+  <form action="../actions/action_new_ticket.php" method="post" class="new_ticket">
+    <input type="text" name="title">
+    <button type="submit">Submit New Ticket</button>
   </form>
 <?php } ?>

@@ -21,13 +21,15 @@
 
 <?php function drawTicket(Ticket $ticket, User $user, array $comments) { ?>
   <h2><?=$ticket->id?></h2>
+      <img src="https://picsum.photos/200?<?=$user->id?>">
+      <p><?=$ticket->title?></p>
+      <a href="../pages/profile.php?id=<?=$ticket->idCreator?>"><?=$ticket->idCreator?>: </a>
   <section id="comments">
     <?php foreach ($comments as $comment) { ?>
     <article>
-      <img src="https://picsum.photos/200?<?=$comment->id?>">
-      <a href="../pages/profile.php?id=<?=$comment->id?>"><?=$comment->content?></a>
+      <a href="../pages/profile.php?id=<?=$comment->idCreator?>"><?=$comment->idCreator?></a>
+      <p> : </p>
       <a href="../pages/comment.php?id=<?=$comment->id?>"><?=$comment->content?></a>
-      <p class="info"><?=$comment->tracks?> tracks / <?=$comment->length?> min</p>
     </article>
     <?php } ?>
   </section>

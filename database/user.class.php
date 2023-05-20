@@ -30,7 +30,7 @@
         $stmt->execute(array($username, $name, $email, sha1($password)));
       } catch(PDOException $e) {
         die("Not unique: " . $e->getMessage());
-    }
+      }
     }
     
     static function getUserWithPassword(PDO $db, string $email, string $password) : ? User {

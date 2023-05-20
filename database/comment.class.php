@@ -85,7 +85,7 @@
           $comment['timestamp'], 
           $comment['content'],
           $comment['idCreator'],
-          $commend['idTicket']
+          $comment['idTicket']
         );
       }
 

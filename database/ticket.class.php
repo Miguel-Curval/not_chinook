@@ -10,8 +10,11 @@
     public string $departmentName;
     public int $priority;
 
-    public function __construct(int $id, string $title, string $status, int $idCreator, int $idAssigned, string $departmentName, int $priority)
+    public function __construct(int $id, string $title, string $status, int $idCreator, $idAssigned, $departmentName, $priority)
     { 
+      if (!$idAssigned) $idAssigned = 0;
+      if (!$departmentName) $departmentName = '';
+      if (!$priority) $priority = 0;
       $this->id = $id;
       $this->title = $title;
       $this->status = $status;
@@ -21,6 +24,20 @@
       $this->priority = $priority;
 
     }
+
+    static function newTicket(PDO $db, string $title, int $idCreator) {
+    try {
+      $stmt = $db->prepare('
+        INSERT
+        INTO Ticket (title, idCreator) 
+        VALUES (?, ?)
+      ');
+
+      $stmt->execute(array($title, $idCreator));
+    } catch(PDOException $e) {
+      die("Not unique: " . $e->getMessage());
+    }
+  }
 
     static function getTickets(PDO $db, int $count) : array {
       $stmt = $db->prepare('
