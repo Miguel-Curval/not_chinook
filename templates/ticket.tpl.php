@@ -1,7 +1,14 @@
 <?php 
   declare(strict_types = 1); 
 
-  require_once(__DIR__ . '/../database/ticket.class.php')
+  require_once(__DIR__ . '/../database/ticket.class.php');
+  require_once(__DIR__ . '/../database/user.class.php');
+
+
+  function getUserNameById($id){
+    $db = getDatabaseConnection();
+    return User::getUser($db, $id)->name;
+  }
 ?>
 
 <?php function drawTickets(array $tickets) { ?>
@@ -11,8 +18,8 @@
   </header>
   <section id="tickets">
     <?php foreach($tickets as $ticket) { ?> 
-      <article>
-        <img src="https://picsum.photos/200?<?=$ticket->id?>">
+      <article id="ticket">
+        <h2>ID: <?=$ticket->id?></h2>
         <a href="../pages/ticket.php?id=<?=$ticket->id?>"><?=$ticket->title?></a>
       </article>
     <?php } ?>
@@ -20,18 +27,28 @@
 <?php } ?>
 
 <?php function drawTicket(Ticket $ticket, User $user, array $comments) { ?>
-  <h2><?=$ticket->id?></h2>
-      <img src="https://picsum.photos/200?<?=$user->id?>">
-      <p><?=$ticket->title?></p>
-      <a href="../pages/profile.php?id=<?=$ticket->idCreator?>"><?=$ticket->idCreator?>: </a>
+  <article class="ticket">
+    <div class="ticket_header">
+      <h2>Ticket ID Nº: <?=$ticket->id?></h2>
+      <a href="../pages/profile.php?id=<?=$ticket->idCreator?>"><h2>User: <?=getUserNameById($ticket->idCreator)?></h2></a>
+      <h2>Status: <?=$ticket->status?></h2>
+    </div>
+    <h3>Description:</h3>
+    <h3><?=$ticket->title?></h3>
+  </article>
+
   <section id="comments">
     <?php foreach ($comments as $comment) { ?>
-    <article>
-      <a href="../pages/profile.php?id=<?=$comment->idCreator?>"><?=$comment->idCreator?></a>
-      <p> : </p>
-      <a href="../pages/comment.php?id=<?=$comment->id?>"><?=$comment->content?></a>
+    <article class="comment">
+      <a href="../pages/profile.php?id=<?=$comment->idCreator?>"><?=getUserNameById($comment->idCreator)?></a>
+      <h3 href="../pages/comment.php?id=<?=$comment->id?>"><?=$comment->content?></h3>
     </article>
     <?php } ?>
+    <form class="add_comment" action="action_add_comment.php" method="post">
+      <input type="text" name="comment" placeholder="Add a comment...">
+      <button type="submit">Send</button>
+    </form>
+  </div>
   </section>
 <?php } ?>
 

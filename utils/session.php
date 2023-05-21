@@ -40,5 +40,12 @@
     public function getMessages() {
       return $this->messages;
     }
+
+    public function addDebug($var) {
+      $_SESSION['debug'][] = $var;
+    }
+    public function getDebug() {
+      return isset($_SESSION['debug']) ? $_SESSION['debug'] : null;  
+    }
   }
 ?>
