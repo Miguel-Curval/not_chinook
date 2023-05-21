@@ -67,7 +67,9 @@ CREATE TABLE Comment (
 ********************************************************************************/
 
 INSERT INTO Department (name) VALUES ('IT');
-INSERT INTO User (username, name, email, password, role, departmentName) VALUES ('mike', 'Miguel', 'm@m.com', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'client', 'IT'); /* pass is "pass" */
+INSERT INTO User (username, name, email, password, role, departmentName) VALUES ('mike', 'Miguel', 'mike@gmail.com', 'a17fed27eaa842282862ff7c1b9c8395a26ac320', 'client', 'IT'); /* pass is "mike" */
+INSERT INTO User (username, name, email, password, role, departmentName) VALUES ('mary', 'mary', 'mary@gmail.com', '5665331b9b819ac358165f8c38970dc8c7ddb47d', 'client', 'IT'); /* pass is "mary" */
 INSERT INTO User (username, name, email, password, role, departmentName) VALUES ('john', 'Agent John', 'john@gmail.com', 'a51dda7c7ff50b61eaea0444371f4a6a9301e501', 'agent', 'IT'); /* pass is "john" */
-INSERT INTO Ticket (title, idCreator, idAssigned, departmentName, priority) VALUES ('My laptop keeps restarting', 1, 1, 'IT', 1);
+INSERT INTO Ticket (title, idCreator, idAssigned, departmentName, priority) VALUES ('My laptop keeps restarting', 1, 3, 'IT', 1);
+INSERT INTO Ticket (title, idCreator, idAssigned, departmentName, priority) VALUES ('My software is malfunctioning', 2, 3, 'IT', 1);
 INSERT INTO Comment (content, idCreator, idTicket) VALUES ('help please', 1, 1);
