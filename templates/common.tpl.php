@@ -1,12 +1,15 @@
-<?php 
-  declare(strict_types = 1); 
+<?php
 
-  require_once(__DIR__ . '/../utils/session.php');
+declare(strict_types=1);
+
+require_once(__DIR__ . '/../utils/session.php');
 ?>
 
-<?php function drawHeader(Session $session) { ?>
-<!DOCTYPE html>
-<html lang="en-US">
+<?php function drawHeader(Session $session)
+{ ?>
+  <!DOCTYPE html>
+  <html lang="en-US">
+
   <head>
     <title>Tickets thingie</title>
     <meta charset="utf-8">
@@ -15,39 +18,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="../javascript/script.js" defer></script>
   </head>
+
   <body>
 
     <header>
-    <h1><a href="/">Tickets thingie</a></h1>
-    <h1><a href="../pages/new_ticket.php">Submit New Ticket</a></h1>
-      <?php 
-        if ($session->isLoggedIn()) drawLogoutForm($session);
-        else drawLoginForm();
+      <h1><a href="/">Tickets thingie</a></h1>
+
+      <?php if ($session->isLoggedIn()) { ?>
+        <h1><a href="../pages/new_ticket.php">Submit New Ticket</a></h1>
+      <?php
+      } ?>
+      <?php
+      if ($session->isLoggedIn()) drawLogoutForm($session);
+      else drawLoginForm();
       ?>
     </header>
-  
+
     <section id="messages">
       <?php foreach ($session->getMessages() as $message) { ?>
-        <article class="<?=$message['type']?>">
-          <?=$message['text']?>
+        <article class="<?= $message['type'] ?>">
+          <?= $message['text'] ?>
         </article>
       <?php } ?>
     </section>
 
     <main>
-<?php } ?>
+    <?php } ?>
 
-<?php function drawFooter() { ?>
+    <?php function drawFooter()
+    { ?>
     </main>
-
     <footer>
       Tickets Thingie &copy; 2023
     </footer>
   </body>
-</html>
+
+  </html>
 <?php } ?>
 
-<?php function drawLoginForm() { ?>
+<?php function drawLoginForm()
+{ ?>
   <form action="../actions/action_login.php" method="post" class="login">
     <input type="email" name="email" placeholder="email">
     <input type="password" name="password" placeholder="password">
@@ -56,14 +66,16 @@
   </form>
 <?php } ?>
 
-<?php function drawLogoutForm(Session $session) { ?>
+<?php function drawLogoutForm(Session $session)
+{ ?>
   <form action="../actions/action_logout.php" method="post" class="logout">
-    <a href="../pages/profile.php"><?=$session->getName()?></a>
+    <a href="../pages/profile.php"><?= $session->getName() ?></a>
     <button type="submit">Logout</button>
   </form>
 <?php } ?>
 
-<?php function drawNewTicketForm() { ?>
+<?php function drawNewTicketForm()
+{ ?>
   <form action="../actions/action_new_ticket.php" method="post" class="new_ticket">
     <input type="text" name="title">
     <button type="submit">Submit New Ticket</button>
