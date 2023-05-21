@@ -11,7 +11,7 @@ require_once(__DIR__ . '/../utils/session.php');
   <html lang="en-US">
 
   <head>
-    <title>Tickets thingie</title>
+    <title>IssueTracker</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
@@ -22,7 +22,7 @@ require_once(__DIR__ . '/../utils/session.php');
   <body>
 
     <header>
-      <h1><a href="/">Tickets thingie</a></h1>
+      <h1><a href="/">IssueTracker</a></h1>
 
       <?php if ($session->isLoggedIn()) { ?>
         <h1><a href="../pages/new_ticket.php">Submit New Ticket</a></h1>
@@ -49,7 +49,7 @@ require_once(__DIR__ . '/../utils/session.php');
     { ?>
     </main>
     <footer>
-      Tickets Thingie &copy; 2023
+      IssueTracker &copy; 2023
     </footer>
   </body>
 

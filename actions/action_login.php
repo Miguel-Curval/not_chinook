@@ -13,6 +13,7 @@
 
   if ($user) {
     $session->setId($user->id);
+    $session->setRole($user->role);
     $session->setName($user->username);
     $session->addMessage('success', 'Login successful!');
   } else {
@@ -20,4 +21,3 @@
   }
 
   header('Location: ' . $_SERVER['HTTP_REFERER']);
-?>
