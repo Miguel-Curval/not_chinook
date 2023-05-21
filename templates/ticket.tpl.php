@@ -54,7 +54,8 @@ function getUserNameById($id)
         <h3 href="../pages/comment.php?id=<?= $comment->id ?>"><?= $comment->content ?></h3>
       </article>
     <?php } ?>
-    <form class="add_comment" action="action_add_comment.php" method="post">
+    <form class="add_comment" action="../actions/action_add_comment.php" method="post">
+      <input type="hidden" name="ticketId" value="<?php echo $_GET['id']; ?>">
       <input type="text" name="comment" placeholder="Add a comment...">
       <button type="submit">Send</button>
     </form>
