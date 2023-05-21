@@ -112,6 +112,7 @@
     static function getUserTickets(PDO $db, int $id) : array {
       $stmt = $db->prepare('
         SELECT id, title, status, idCreator, idAssigned, departmentName, priority 
+        FROM Ticket
         WHERE idCreator = ?
       ');
       $stmt->execute(array($id));

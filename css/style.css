@@ -156,6 +156,14 @@ footer {
   color: white;
 }
 
+.logout{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 15%;
+  align-items: center;
+}
+
 #messages article {
   margin: 1em 0;
   padding: 1em;

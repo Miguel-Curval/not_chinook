@@ -12,9 +12,14 @@
 
   $db = getDatabaseConnection();
 
-  $tickets = Ticket::getTickets($db, 8);
-
   drawHeader($session);
-  drawTickets($tickets);
+
+  if ($session->isLoggedIn()){
+    $tickets = Ticket::getUserTickets($db, $session->getId());
+    drawTickets($tickets);
+  } else{ ?>
+    <h3> Please login to see your tickets </h3>
+  <?php }
+
   drawFooter();
 ?>

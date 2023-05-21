@@ -41,7 +41,7 @@
     </main>
 
     <footer>
-      FAP é merda blablabla &copy; 2023
+      Tickets Thingie &copy; 2023
     </footer>
   </body>
 </html>
