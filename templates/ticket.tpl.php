@@ -40,6 +40,11 @@ function getUserNameById($id)
         <h2>User: <?= getUserNameById($ticket->idCreator) ?></h2>
       </a>
       <h2>Status: <?= $ticket->status ?></h2>
+      
+    <form class="close" action="../actions/action_close.php" method="post">
+      <input type="hidden" name="ticketId" value="<?php echo $_GET['id']; ?>">
+      <button type="submit">Close</button>
+    </form>
     </div>
     <div class="ticket_description">
       <h3>Description:</h3>

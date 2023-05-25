@@ -7,14 +7,14 @@ if (searchTicket) {
     const section = document.querySelector('#tickets')
     section.innerHTML = ''
 
-    for (const artist of tickets) {
-      const article = document.createElement('article')
-      const img = document.createElement('img')
-      img.src = 'https://picsum.photos/200?' + artist.id
+    for (const ticket of tickets) {
+      article = document.createElement('article')
+      h2 = document.createElement('h2')
+      article.appendChild(h2)
+      article.textContent = 'ID: ' + ticket.id
       const link = document.createElement('a')
-      link.href = '../pages/artist.php?id=' + artist.id
-      link.textContent = artist.name
-      article.appendChild(img)
+      link.href = '../pages/ticket.php?id=' + ticket.id
+      link.textContent = ticket.title
       article.appendChild(link)
       section.appendChild(article)
     }

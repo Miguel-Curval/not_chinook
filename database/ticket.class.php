@@ -142,6 +142,15 @@
 
       $stmt->execute(array($this->title, $this->id));
     }
+
+    function close(PDO $db) {
+      $stmt = $db->prepare('
+        UPDATE Ticket SET status = ?
+        WHERE id = ?
+      ');
+
+      $stmt->execute(array('closed', $this->id));
+    }
   
   }
 ?>

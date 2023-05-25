@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+}
+
+.left-side {
+  background-color: blue;
+  color: white;
+  width: 66.66%;
+  padding: 20px;
+}
+
+.left-side h1 {
+  margin: 0;
+}
+
+.right-side {
+  background-color: white;
+  color: black;
+  width: 33.33%;
+  padding: 20px;
+}
+
+.top-right {
+  text-align: right;
+}
+
+.create-account {
+  margin-top: 20px;
+}
+
+.create-account p {
+  margin: 0;
+}
+
+form {
+  margin-top: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  display: block;
+  margin-bottom: 10px;
+}
+
+button {
+  border-radius: 10px;
+}
