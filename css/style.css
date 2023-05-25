@@ -258,14 +258,29 @@ button[type="submit"]:focus {
   justify-content: flex-start;
   padding: 2rem;
   height: 4rem;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-#ticket h2{
-  margin-right: 3rem;
+#ticket:hover {
+  background-color: var(--main-color);
+}
+
+#ticket :first-child{
+  text-align: center;
+  width: 4rem;
+  margin-right: 2rem;
   color: #333;
 }
 
-#ticket a{
+
+#ticket :nth-child(2){
+  text-align: center;
+  width: 8rem;
+  margin-right: 2rem;
+  color: #333;
+}
+
+#ticket p{
   font-size: 20px;
   color: #333;
   font-weight: bold;

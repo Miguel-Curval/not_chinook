@@ -22,10 +22,11 @@ function getUserNameById($id)
     </header>
     <section id="tickets">
       <?php foreach ($tickets as $ticket) { ?>
-        <article id="ticket">
-          <h2>ID: <?= $ticket->id ?></h2>
-          <a href="../pages/ticket.php?id=<?= $ticket->id ?>"><?= $ticket->title ?></a>
-        </article>
+        <a href="../pages/ticket.php?id=<?= $ticket->id ?>" id="ticket">
+          <h2><?= getUserNameById($ticket->idCreator) ?></h2>
+          <h2>Ticket ID: <?= $ticket->id ?></h2>
+          <p><?= $ticket->title ?></p>
+        </a>
       <?php } ?>
     </section>
   </content>
@@ -40,11 +41,6 @@ function getUserNameById($id)
         <h2>User: <?= getUserNameById($ticket->idCreator) ?></h2>
       </a>
       <h2>Status: <?= $ticket->status ?></h2>
-      
-    <form class="close" action="../actions/action_close.php" method="post">
-      <input type="hidden" name="ticketId" value="<?php echo $_GET['id']; ?>">
-      <button type="submit">Close</button>
-    </form>
     </div>
     <div class="ticket_description">
       <h3>Description:</h3>
